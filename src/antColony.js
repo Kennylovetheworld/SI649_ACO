@@ -44,8 +44,8 @@ var antColony = (function(ps) {
 			pheromone.play();
 			pheromone.anchor.x = 0.5;
 			pheromone.anchor.y = 0.5;
-			pheromone.scale.x = 0.05;
-			pheromone.scale.y = 0.05;
+			pheromone.scale.x = 0.07;
+			pheromone.scale.y = 0.07;
 			pheromone.rotation = Math.random() * 2 * Math.PI;
 			// Start the pheromone out of bounds
 			pheromone.position.x = -1000;
@@ -126,8 +126,8 @@ var antColony = (function(ps) {
         node.anchor.y = 0.5;
         node.position.x = x;
         node.position.y = y;
-        node.scale.x = 0.1;
-        node.scale.y = 0.1;
+        node.scale.x = 0.2;
+        node.scale.y = 0.2;
         node.interactive = true;
         node.mousedown = node.touchstart = function(data) {
             data.data.originalEvent.preventDefault();
