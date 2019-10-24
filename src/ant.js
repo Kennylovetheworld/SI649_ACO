@@ -17,8 +17,8 @@ var ant = (function(ps) {
         ant.play();
         ant.anchor.x = 0.5;
         ant.anchor.y = 0.5;
-        ant.scale.x = 0.25;
-        ant.scale.y = 0.25;
+        ant.scale.x = 0.45;
+        ant.scale.y = 0.45;
 		// Start the ant out of bounds
         ant.position.x = -1000;
         ant.position.y = -1000;
