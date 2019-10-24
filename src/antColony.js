@@ -126,8 +126,8 @@ var antColony = (function(ps) {
         node.anchor.y = 0.5;
         node.position.x = x;
         node.position.y = y;
-        node.scale.x = 0.20;
-        node.scale.y = 0.20;
+        node.scale.x = 0.02;
+        node.scale.y = 0.02;
         node.interactive = true;
         node.mousedown = node.touchstart = function(data) {
             data.data.originalEvent.preventDefault();
