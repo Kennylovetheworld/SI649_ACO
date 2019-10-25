@@ -299,7 +299,7 @@ var antColony = (function(ps) {
 
     function _drawBest() {
         trail.clear();
-        trail.lineStyle(10, 0x0C7EE8, 0.4);
+        trail.lineStyle(15, 0xFFCB05, 0.4);
         trail.moveTo(best.path[0].position.x, best.path[0].position.y);
         best.path.forEach(function (point, i) {
             var j = (i+1)%best.path.length;
