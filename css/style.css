@@ -1,36 +1,33 @@
 body {
-    background-color: black;
+    margin: 20;
+	padding: 20;
+    background-color: #00274C;
 }
 
 #help {
-    display: none;
+    font-size: 18px;
+    margin-left: 100px;
+    margin-right: 100px;
+    color: #FFCB05;
 }
 
-.credits {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    color: white;
-}
-
-.intro {
-    cursor: pointer;
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-}
-
-.instructions {
+.help_title {
     font-size: 24px;
+}
+.instructions {
+    font-size: 18px;
     text-align: center;
 }
 
-.help_close {
-    margin-top: 20px;
+.btn-primary {
+    color: #00274C;
+    background-color: #FFCB05;
+    border-radius: 10rem;
+    font-size: 24px;
 }
 
-.wip {
-    position: fixed;
+.help_close {
+    margin-top: 30px;
 }
 
 @link-color

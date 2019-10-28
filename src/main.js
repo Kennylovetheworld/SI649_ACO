@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var W = 1600;
 	var H = 900;
 	var ratio = W/H;
-	var renderer = PIXI.autoDetectRenderer(W, H, null, false, true);
+	var renderer = PIXI.autoDetectRenderer(W, H, { transparent: true }, null, false, true);
 	var started = false;
 
     document.body.appendChild(renderer.view);
@@ -46,7 +46,7 @@ $(document).ready(function() {
     // fonts
     WebFontConfig = {
         google: {
-            families: [ 'Karla' ]
+            families: [ 'Proxima Nova' ]
         },
 
         active: function () {
@@ -83,11 +83,11 @@ $(document).ready(function() {
         }
 
         $('#help').popup({
-            transition: 'all 1.0s',
+            transition: 'all 0.1s',
             autoopen: true,
             background: true,
-            color: '#EAEAEA',
-            // opacity: 0.9,
+            color: '#00274C',
+            opacity: 1,
             closetransitionend: function () {
                 if (!started) {
                     requestAnimationFrame(render);
