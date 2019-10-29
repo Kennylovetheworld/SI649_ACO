@@ -308,7 +308,7 @@ var antColony = (function(ps) {
     }
 
 	function _step() {
-		for (var i = 0; i < ps.nbAnts; i++) {s
+		for (var i = 0; i < ps.nbAnts; i++) {
 			var candidate = {};
 			candidate.indices = _stepwiseConst(ps.heuristic);
             candidate.cost = _cost(candidate.indices);
