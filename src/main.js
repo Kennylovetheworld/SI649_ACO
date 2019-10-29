@@ -66,6 +66,7 @@ $(document).ready(function() {
 
     function run() {
         ant.init(W, H);
+        candidateAnt.init(W, H);
         antColony.init(W, H);
 
         // first render

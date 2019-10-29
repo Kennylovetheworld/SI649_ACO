@@ -6,7 +6,7 @@ var antColony = (function(ps) {
 	var initPheromone;
 	var pheromone;
 	var distances;
-	var best;
+    var best;
 	var time;
 
     // rendering
@@ -105,7 +105,7 @@ var antColony = (function(ps) {
 		container.addChild(pheromoneSpriteGroup);
         // add the ant
         container.addChild(ant.getSprite());
-
+        container.addChild(candidateAnt.getSprite());//fsk
     }
 
 
@@ -311,17 +311,18 @@ var antColony = (function(ps) {
 		for (var i = 0; i < ps.nbAnts; i++) {
 			var candidate = {};
 			candidate.indices = _stepwiseConst(ps.heuristic);
-			candidate.cost = _cost(candidate.indices);
+            candidate.cost = _cost(candidate.indices);
+            candidate.path = _indicesToNodes(candidate.indices)
 			// Use it === 1 to invalidate the first random choice
 			if (candidate.cost < best.cost || it === 1) {
 				best = candidate;
-				best.path = _indicesToNodes(best.indices);
 				best.it = it;
 				ant.followPath(best.path);
 				_drawLinks();
 				_drawBest();
-			}
-			_localUpdatePheromone(candidate);
+            }
+            _localUpdatePheromone(candidate);
+            candidateAnt.followPath(candidate.path)
 		}
 
 		_globalUpdatePheromone(best);
