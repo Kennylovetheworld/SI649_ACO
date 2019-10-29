@@ -7,6 +7,7 @@ var antColony = (function(ps) {
 	var pheromone;
 	var distances;
     var best;
+    var best_candidate;
 	var time;
 
     // rendering
@@ -21,9 +22,12 @@ var antColony = (function(ps) {
 	var pheromoneTex = [];
     var back = PIXI.Sprite.fromImage('img/1x1.png');
     var trail = new PIXI.Graphics();
+    var candidateTrail = new PIXI.Graphics();
+
     var itText;
     var bestText;
     var nodesText;
+    
 
 
 	// Add the texture for the pheromones
@@ -83,7 +87,9 @@ var antColony = (function(ps) {
 
         // trail
         trail.clear();
+        candidateTrail.clear();
         container.addChild(trail);
+        container.addChild(candidateTrail);
 
         // text
         itText = new PIXI.Text("Iterations: 0", { font: "36px Karla", fill: "white", align: "left" });
@@ -91,7 +97,7 @@ var antColony = (function(ps) {
         itText.position.y = 20;
         container.addChild(itText);
 
-        bestText = new PIXI.Text("Best: ?", { font: "36px Karla", fill: "#FFCB05", align: "left" });
+        bestText = new PIXI.Text("Shortest Distance Found: ?", { font: "36px Karla", fill: "#FFCB05", align: "left" });
         bestText.position.x = 20;
         bestText.position.y = 100;
         container.addChild(bestText);
@@ -307,12 +313,26 @@ var antColony = (function(ps) {
         });
     }
 
+    function _drawBestCandidate() {
+        candidateTrail.clear();
+        candidateTrail.lineStyle(7, 0x87CEEB, 0.4);
+        candidateTrail.moveTo(best_candidate.path[0].position.x, best_candidate.path[0].position.y);
+        best_candidate.path.forEach(function (point, i) {
+            var j = (i+1)%best_candidate.path.length;
+            candidateTrail.lineTo(best_candidate.path[j].position.x, best_candidate.path[j].position.y);
+        });
+    }
+
 	function _step() {
+        best_candidate = {}
 		for (var i = 0; i < ps.nbAnts; i++) {
 			var candidate = {};
 			candidate.indices = _stepwiseConst(ps.heuristic);
             candidate.cost = _cost(candidate.indices);
             candidate.path = _indicesToNodes(candidate.indices)
+            if (i === 0||candidate.cost<best_candidate.cost){
+                best_candidate = candidate
+            }
 			// Use it === 1 to invalidate the first random choice
 			if (candidate.cost < best.cost || it === 1) {
 				best = candidate;
@@ -322,14 +342,15 @@ var antColony = (function(ps) {
 				_drawBest();
             }
             _localUpdatePheromone(candidate);
-            
-               candidateAnt.followPath(candidate.path)
-            
+            if(it%5===0){
+                candidateAnt.followPath(best_candidate.path)
+                _drawBestCandidate();
+            }
 		}
 
 		_globalUpdatePheromone(best);
 		itText.text = 'Iteration #' + it++;
-		bestText.text = "Best: " + Math.round(best.cost) + "\nfound at #" + best.it;
+		bestText.text = "Shorest Distance Found: " + Math.round(best.cost) + "\nFound at Iteration #" + best.it;
 		nodesText.text = "Nodes: " + nodes.length;
 		time = Date.now();
 	}
@@ -356,6 +377,7 @@ var antColony = (function(ps) {
 
         togglePath: function () {
             trail.visible = ps.showPath;
+            candidateTrail.visible = ps.showPath;
         },
 
         render: function () {

@@ -6,7 +6,7 @@ var candidateAnt = (function(ps) {
 	var tweens = [];
 	var ant;
     var vanish;
-    var antSpeed = 10;
+    var antSpeed = 20;
 
     function _initGraphics() {
         for (var i = 1; i <= 3; i++) {
