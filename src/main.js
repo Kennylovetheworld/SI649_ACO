@@ -13,7 +13,7 @@ $(document).ready(function() {
 
     window.addEventListener('resize', function () {
         renderer.view.style.width = (window.innerWidth - 20) + "px";
-        renderer.view.style.height = Math.min(window.innerHeight - 20, (window.innerWidth / ratio - 20)) + "px"; //0.9*window.innerHeight + "px";
+        renderer.view.style.height = Math.min(window.innerHeight - 20, (window.innerWidth / ratio - 20)) + "px"; 
     }, false);
 
     // stats
@@ -26,9 +26,9 @@ $(document).ready(function() {
     function initDatGui() {
         var gui = new dat.GUI();
         var controllers = [];
-        controllers.push(gui.add(params, 'nbAnts', 1, 20).name('Number of Ants'));
-        gui.add(params, 'simulationSpeed', 0.1, 100).name('Demo speed');
-        controllers.push(gui.add(params, 'antSpeed', 1, 5).step(1).name('Ant speed'));
+        controllers.push(gui.add(params, 'nbAnts', 1, 200).name('Number of Ants'));
+        gui.add(params, 'simulationSpeed', 0.1, 500).name('Demo speed');
+        controllers.push(gui.add(params, 'antSpeed', 1, 50).step(1).name('Ant speed'));
         gui.add(params, 'showPheromones').name('Pheromones').onChange(function (value) {
             antColony.togglePheromones();
         });

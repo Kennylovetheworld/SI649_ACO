@@ -86,19 +86,19 @@ var antColony = (function(ps) {
         container.addChild(trail);
 
         // text
-        itText = new PIXI.Text("Iterations: 0", { font: "35px Karla", fill: "white", align: "left" });
+        itText = new PIXI.Text("Iterations: 0", { font: "36px Karla", fill: "white", align: "left" });
         itText.position.x = 20;
         itText.position.y = 20;
         container.addChild(itText);
 
-        bestText = new PIXI.Text("Best: ?", { font: "35px Karla", fill: "green", align: "left" });
+        bestText = new PIXI.Text("Best: ?", { font: "36px Karla", fill: "#FFCB05", align: "left" });
         bestText.position.x = 20;
-        bestText.position.y = 60;
+        bestText.position.y = 100;
         container.addChild(bestText);
 
-        nodesText = new PIXI.Text("Nodes: " + nodes.length, { font: "35px Karla", fill: "white", align: "left" });
+        nodesText = new PIXI.Text("Nodes: " + nodes.length, { font: "36px Karla", fill: "white", align: "left" });
         nodesText.position.x = 20;
-        nodesText.position.y = 140;
+        nodesText.position.y = 60;
         container.addChild(nodesText);
 
 		// add the pheromone sprite group
