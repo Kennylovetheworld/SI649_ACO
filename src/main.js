@@ -28,7 +28,7 @@ $(document).ready(function() {
         var controllers = [];
         controllers.push(gui.add(params, 'nbAnts', 1, 200).name('Number of Ants'));
         gui.add(params, 'simulationSpeed', 0.1, 500).name('Demo speed');
-        controllers.push(gui.add(params, 'antSpeed', 1, 50).step(1).name('Ant speed'));
+        controllers.push(gui.add(params, 'antSpeed', 1, 10).step(1).name('Ant speed'));
         gui.add(params, 'showPheromones').name('Pheromones').onChange(function (value) {
             antColony.togglePheromones();
         });

@@ -5,11 +5,12 @@ var candidateAnt = (function(ps) {
 	var antTex = [];
 	var tweens = [];
 	var ant;
-	var vanish;
+    var vanish;
+    var antSpeed = 10;
 
     function _initGraphics() {
         for (var i = 1; i <= 3; i++) {
-            antTex.push(PIXI.Texture.fromImage("img/Ant_" + i + ".png"));
+            antTex.push(PIXI.Texture.fromImage("img/candidateAnt_" + i + ".png"));
         }
 
         ant = new PIXI.extras.MovieClip(antTex);
@@ -49,13 +50,13 @@ var candidateAnt = (function(ps) {
             tweens = _.flatten(path.map(function (p, i) {
                 return [
                     new TWEEN.Tween(rot)
-                        .to({angle: _steerAngle(p, path[(i+1)%path.length].position)}, 100 / ps.antSpeed)
+                        .to({angle: _steerAngle(p, path[(i+1)%path.length].position)}, 100 / antSpeed)
                         .easing(TWEEN.Easing.Quadratic.Out)
                         .onUpdate(function () {
                             ant.rotation = this.angle;
                         }),
                     new TWEEN.Tween(ant.position)
-                        .to(path[(i+1)%path.length].position, 1000 / ps.antSpeed)
+                        .to(path[(i+1)%path.length].position, 1000 / antSpeed)
                         .easing(TWEEN.Easing.Cubic.Out)
                         .onUpdate(function () {
                             ant.position.x = this.x;

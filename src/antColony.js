@@ -322,7 +322,9 @@ var antColony = (function(ps) {
 				_drawBest();
             }
             _localUpdatePheromone(candidate);
-            candidateAnt.followPath(candidate.path)
+            
+               candidateAnt.followPath(candidate.path)
+            
 		}
 
 		_globalUpdatePheromone(best);
