@@ -7,7 +7,7 @@ var antColony = (function(ps) {
 	var pheromone;
 	var distances;
     var best;
-    var time;
+	var time;
 
     // rendering
     var W = 1600;
@@ -322,7 +322,9 @@ var antColony = (function(ps) {
 				_drawBest();
             }
             _localUpdatePheromone(candidate);
-            candidateAnt.followPath(candidate.path)
+            
+               candidateAnt.followPath(candidate.path)
+            
 		}
 
 		_globalUpdatePheromone(best);
@@ -374,8 +376,3 @@ var antColony = (function(ps) {
     };
 
 }(params));
-
-
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
