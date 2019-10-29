@@ -1,4 +1,4 @@
-var candidateAnt = (function() {
+var candidateAnt = (function(ps) {
     'use strict';
 
     // rendering
@@ -96,4 +96,4 @@ var candidateAnt = (function() {
 
     };
 
-})();
+})(params);
