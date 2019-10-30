@@ -24,12 +24,12 @@ $(document).ready(function() {
         var gui = new dat.GUI();
         var controllers = [];
         controllers.push(gui.add(params, 'nbAnts', 1, 200).name('Number of Ants'));
-        gui.add(params, 'simulationSpeed', 1, 3).step(0.01).name('Speed of the Algorithm');
+        gui.add(params, 'simulationSpeed', 1, 3).step(0.01).name('Algorithm Speed');
         controllers.push(gui.add(params, 'antSpeed', 1, 10).step(1).name('Ant speed'));
         gui.add(params, 'showPheromones').name('Pheromones').onChange(function (value) {
             antColony.togglePheromones();
         });
-        gui.add(params, 'showPath').name('Path').onChange(function (value) {
+        gui.add(params, 'showPath').name('Best Path').onChange(function (value) {
             antColony.togglePath();
         });
         gui.add(params, 'showCandidatePath').name('Candidate Path').onChange(function (value) {
@@ -71,7 +71,9 @@ $(document).ready(function() {
 
         // first render
         renderer.render(antColony.container);
-		initDatGui();
+        initDatGui();
+        antColony.togglePheromones();
+        antColony.togglePath();
 
         function render() {
             var time = Date.now();
@@ -101,5 +103,4 @@ $(document).ready(function() {
             $('#help').popup();
         });
     }
-
 });

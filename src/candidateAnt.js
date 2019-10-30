@@ -6,7 +6,7 @@ var candidateAnt = (function(ps) {
 	var tweens = [];
 	var ant;
     var vanish;
-    var antSpeed = 20;
+    var antSpeed = 13;
 
     function _initGraphics() {
         for (var i = 1; i <= 3; i++) {
@@ -18,8 +18,8 @@ var candidateAnt = (function(ps) {
         ant.play();
         ant.anchor.x = 0.5;
         ant.anchor.y = 0.5;
-        ant.scale.x = 0.20;
-        ant.scale.y = 0.20;
+        ant.scale.x = 0.1;
+        ant.scale.y = 0.1;
 		// Start the ant out of bounds
         ant.position.x = -1000;
         ant.position.y = -1000;
@@ -55,8 +55,9 @@ var candidateAnt = (function(ps) {
                         .onUpdate(function () {
                             ant.rotation = this.angle;
                         }),
+
                     new TWEEN.Tween(ant.position)
-                        .to(path[(i+1)%path.length].position, 1000 / antSpeed)
+                        .to({ x: path[(i+1)%path.length].position.x * ps.bcp_Thumbnail.div + ps.bcp_Thumbnail.x, y: path[(i+1)%path.length].position.y * ps.bcp_Thumbnail.div + ps.bcp_Thumbnail.y }, 1000 / antSpeed)
                         .easing(TWEEN.Easing.Cubic.Out)
                         .onUpdate(function () {
                             ant.position.x = this.x;
@@ -66,18 +67,18 @@ var candidateAnt = (function(ps) {
             }));
 
             vanish = new TWEEN.Tween({alpha: ant.alpha})
-                .to({alpha: 0}, 500)
+                .to({alpha: 0}, 0)
                 .easing(TWEEN.Easing.Quadratic.Out)
                 .onUpdate(function () {
                     ant.alpha = this.alpha;
                 })
                 .onComplete(function () {
-                    ant.position.x = path[0].position.x;
-                    ant.position.y = path[0].position.y;
+                    ant.position.x = path[0].position.x * ps.bcp_Thumbnail.div + ps.bcp_Thumbnail.x;
+                    ant.position.y = path[0].position.y * ps.bcp_Thumbnail.div + ps.bcp_Thumbnail.y;
                 });
 
             var appear = new TWEEN.Tween({alpha: ant.alpha})
-                .to({alpha: 1}, 500)
+                .to({alpha: 1}, 0)
                 .easing(TWEEN.Easing.Quadratic.Out)
                 .onUpdate(function () {
                     ant.alpha = this.alpha;

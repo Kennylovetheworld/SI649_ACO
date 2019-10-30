@@ -11,8 +11,9 @@ var params = (function() {
         antSpeed: 2,
         simulationSpeed: 1,
         showPheromones: true,
-        showPath: true,
-        showCandidatePath: true
+        showPath: false,
+        showCandidatePath: false,
+        bcp_Thumbnail: {x: -30, y: 250, div: 1/3}
     };
 
 }());
