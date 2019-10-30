@@ -169,7 +169,7 @@ var antColony = (function(ps) {
         legendText.position.y = 870;
         container.addChild(legendText);
 
-        legendText = new PIXI.Text("Best candidate solution: ", { font: "24px Lato", fill: "#FF99AA", align: "left" });
+        legendText = new PIXI.Text("Best candidate solution within current iteration: ", { font: "24px Lato", fill: "#FF99AA", align: "left" });
         legendText.position.x = 20;
         legendText.position.y = 200;
         container.addChild(legendText);
