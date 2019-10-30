@@ -18,21 +18,21 @@ $(document).ready(function() {
 
     // stats
     var stats = new Stats();
-    // document.body.appendChild(stats.domElement);
-    // stats.domElement.style.position = 'absolute';
-    // stats.domElement.style.top = '0px';
 
     // gui
     function initDatGui() {
         var gui = new dat.GUI();
         var controllers = [];
         controllers.push(gui.add(params, 'nbAnts', 1, 200).name('Number of Ants'));
-        gui.add(params, 'simulationSpeed', 1, 10).step(0.01).name('Speed of the Algorithm');
+        gui.add(params, 'simulationSpeed', 1, 3).step(0.01).name('Speed of the Algorithm');
         controllers.push(gui.add(params, 'antSpeed', 1, 10).step(1).name('Ant speed'));
         gui.add(params, 'showPheromones').name('Pheromones').onChange(function (value) {
             antColony.togglePheromones();
         });
         gui.add(params, 'showPath').name('Path').onChange(function (value) {
+            antColony.togglePath();
+        });
+        gui.add(params, 'showCandidatePath').name('Candidate Path').onChange(function (value) {
             antColony.togglePath();
         });
 
@@ -46,7 +46,7 @@ $(document).ready(function() {
     // fonts
     WebFontConfig = {
         google: {
-            families: [ 'Proxima Nova' ]
+            families: [ 'Lato' ]
         },
 
         active: function () {

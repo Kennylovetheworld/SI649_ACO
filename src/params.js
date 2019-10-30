@@ -11,7 +11,8 @@ var params = (function() {
         antSpeed: 2,
         simulationSpeed: 1,
         showPheromones: true,
-        showPath: true
+        showPath: true,
+        showCandidatePath: true
     };
 
 }());

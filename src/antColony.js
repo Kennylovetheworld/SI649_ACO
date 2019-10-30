@@ -118,10 +118,11 @@ var antColony = (function(ps) {
 	// Hard-coded set of default nodes
 	// Better looking than random nodes
     function _initColony() {
-		_addNode(500, 150);
-		_addNode(1000, 250);
-		_addNode(1200, 500);
-		_addNode(200, 600);
+        _addNode(800, 200);
+        _addNode(500, 300);
+		_addNode(1000, 400);
+		_addNode(900, 700);
+		_addNode(600, 600);
     }
 
     function _addNode(x, y) {
@@ -313,13 +314,13 @@ var antColony = (function(ps) {
         });
     }
 
-    function _drawBestCandidate() {
+    function _drawCandidate(candidate_path) {
         candidateTrail.clear();
-        candidateTrail.lineStyle(7, 0x87CEEB, 0.4);
-        candidateTrail.moveTo(best_candidate.path[0].position.x, best_candidate.path[0].position.y);
-        best_candidate.path.forEach(function (point, i) {
-            var j = (i+1)%best_candidate.path.length;
-            candidateTrail.lineTo(best_candidate.path[j].position.x, best_candidate.path[j].position.y);
+        candidateTrail.lineStyle(7, 0xffffff, 0.5);
+        candidateTrail.moveTo(candidate_path[0].position.x, candidate_path[0].position.y);
+        candidate_path.forEach(function (point, i) {
+            var j = (i+1)%candidate_path.length;
+            candidateTrail.lineTo(candidate_path[j].position.x, candidate_path[j].position.y);
         });
     }
 
@@ -330,6 +331,7 @@ var antColony = (function(ps) {
 			candidate.indices = _stepwiseConst(ps.heuristic);
             candidate.cost = _cost(candidate.indices);
             candidate.path = _indicesToNodes(candidate.indices)
+            _drawCandidate(candidate.path);
             if (i === 0||candidate.cost<best_candidate.cost){
                 best_candidate = candidate
             }
@@ -342,9 +344,8 @@ var antColony = (function(ps) {
 				_drawBest();
             }
             _localUpdatePheromone(candidate);
-            if(it%5===0){
+            if(it%2===0){
                 candidateAnt.followPath(best_candidate.path)
-                _drawBestCandidate();
             }
 		}
 
@@ -377,7 +378,7 @@ var antColony = (function(ps) {
 
         togglePath: function () {
             trail.visible = ps.showPath;
-            candidateTrail.visible = ps.showPath;
+            candidateTrail.visible = ps.showCandidatePath;
         },
 
         render: function () {
