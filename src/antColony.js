@@ -111,7 +111,7 @@ var antColony = (function(ps) {
         bestText.position.y = 140;
         container.addChild(bestText);
 
-        nodesText = new PIXI.Text("Nodes: " + nodes.length, { font: "24px Lato", fill: "white", align: "left" });
+        nodesText = new PIXI.Text("Number of Nodes: " + nodes.length, { font: "24px Lato", fill: "white", align: "left" });
         nodesText.position.x = 20;
         nodesText.position.y = 110;
         container.addChild(nodesText);
@@ -254,8 +254,8 @@ var antColony = (function(ps) {
         return _.compact(nodes.map(function (node, i) {
             if (exclude.indexOf(i) === -1) {
                 var prob = { city: i };
-                prob.history = Math.pow(pheromone[lastCity][i], ps.history);
-                prob.heuristic = Math.pow(1 / (distances[lastCity][i] || 1e-6), ps.heuristic);
+                prob.history = Math.pow(pheromone[lastCity][i], ps.ACOAlpha);
+                prob.heuristic = Math.pow(1 / (distances[lastCity][i] || 1e-6), ps.ACOBeta);
                 prob.prob = prob.history * prob.heuristic;
                 return prob;
             }
@@ -427,7 +427,7 @@ var antColony = (function(ps) {
         _drawThumbnail(best_candidate.path)
 
 		_globalUpdatePheromone(best);
-		itText.text = 'Iteration #' + it++;
+		itText.text = 'Iteration #' + it++ + ' --> Pheromone Updated';
 		bestText.text = "Shorest Distance Found: " + Math.round(best.cost) + "\nFound at Iteration #" + best.it;
 		nodesText.text = "Nodes: " + nodes.length;
 		time = Date.now();
@@ -477,8 +477,14 @@ var antColony = (function(ps) {
             }
 
             if (toInit) _init();
-
-			if (dt * ps.simulationSpeed >= 1) {
+            
+            if (dt * ps.simulationSpeed >= 0.5){
+                itText.text = 'Iteration #' + it + ' --> Generating Path';
+            }
+            if (dt * ps.simulationSpeed >= 1.0){
+                itText.text = 'Iteration #' + it + ' --> Comparing Path';
+            }
+			if (dt * ps.simulationSpeed >= 1.5) {
 				_step();
 			}
         }

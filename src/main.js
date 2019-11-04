@@ -25,7 +25,9 @@ $(document).ready(function() {
         var controllers = [];
         controllers.push(gui.add(params, 'nbAnts', 1, 200).name('Number of Ants'));
         gui.add(params, 'simulationSpeed', 1, 3).step(0.01).name('Algorithm Speed');
-        controllers.push(gui.add(params, 'antSpeed', 1, 10).step(1).name('Ant speed'));
+        controllers.push(gui.add(params, 'ACOAlpha', 0.5, 2).step(0.01).name('Alpha ACO (history factor)'));
+        controllers.push(gui.add(params, 'ACOBeta', 1.5, 4).step(0.01).name('Beta ACO (heuristic factor)'));
+        controllers.push(gui.add(params, 'greedy', 0, 1).step(0.01).name('Greedy level when choosing potential solution'));
         gui.add(params, 'showPheromones').name('Pheromones').onChange(function (value) {
             antColony.togglePheromones();
         });
